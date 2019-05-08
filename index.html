@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS-To do List</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/fontawsome.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="clear">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+      </div>
+      <div class="content">
+        <ul id="list">
+          <!--
+          <li class="item">
+            <i class="far fa-circle co" job="complete" id="0"></i>
+            <p class="text">Drink Coffee</p>
+            <i class="far fa-trash-alt de" job="delete" id="0"></i>
+          </li> -->
+          <li class="item">
+            <i class="far fa-check-circle co" job="complete" id="0"></i>
+            <p class="text">Drink Coffee</p>
+            <i class="far fa-trash-alt de" job="delete" id="0"></i>
+          </li>
+        </ul>
+      </div>
+      <div class="add-to-do">
+        <i class="fas fa-plus-circle"></i>
+        <input type="text" id="input" placeholder="Add a to-do" />
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
