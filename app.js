@@ -12,6 +12,33 @@ const LINE_THROUGH = "lineThrough";
 // Variabled
 let LIST, id;
 
+// get item from localstorage
+let data = localStorage.getItem("TODO");
+
+// check if data is not empty
+if (data) {
+  LIST = JSON.parse(date);
+  id = LIST.length; // set the id to the last one in the list
+  loadList(LIST); // load the list to the user interface
+} else {
+  // if data isn't empty
+  LIST = [];
+  id = 0;
+}
+
+// load items to the user's interface
+function loadList(array) {
+  array.forEach(function(item) {
+    addToDo(item.name, item.id, item.done, item.trash);
+  });
+}
+
+// clear the local storage
+clear.addEventListener("click", function() {
+  localStorage.clear();
+  location.reload();
+});
+
 // Show todays date
 const options = { weekday: "long", month: "short", day: "numeric" };
 const today = new Date();
@@ -53,9 +80,44 @@ document.addEventListener("keyup", function(event) {
         done: false,
         trash: false
       });
+
+      //add item to localstorage (this code must be added where the LIST array is updated)
+      localStorage.setItem("TODO", JSON.stringify(LIST));
+
+      id++;
     }
     input.value = "";
   }
 });
 
-addToDo("Coffee", 1, false, false);
+// complete to do
+function completeToDo(element) {
+  element.classList.toggle(CHECK);
+  element.classList.toggle(UNCHECK);
+  element.parentNode.querySelector(".text").classList.toggle(LINE_THROUGHT);
+
+  LIST[element.id].done = LIST[element.id].done ? false : true;
+}
+
+//remove to do
+function removeToDo(element) {
+  element.parentNode.parentNode.removeChild(element.parentNode);
+
+  LIST[element.id].trash = true;
+}
+
+// target the items created dynamically
+
+list.addEventListener("click", function(event) {
+  const element = event.target; // return the clicked element inside list
+  const elementJob = element.attributes.job.value; // complete or delete
+
+  if (elementJob == "complete") {
+    comopleteToDo(element);
+  } else if (elementJob == "delete") {
+    removeToDo(elemnt);
+  }
+
+  // add item to localstorage (this code must be added where the LIST array is updated)
+  localStorage.setItem("TODO", JSON.stringify(LIST));
+});
