@@ -5,19 +5,28 @@ const dateElement = document.getElementById("date");
 const list = document.getElementById("list");
 const input = document.getElementById("input"); */
 
-// Add a to-do
+// show todays date
+const dateElement = document.getElementById("date");
+
+let options = { weekday: "long", month: "short", day: "numeric" };
+let today = new Date();
+
+dataElement.innerHTML = today.toLocaleDateString("en-US", optinos);
+
+// class names
 const list = document.getElementById("list");
 const CHECK = "fa-check-circle";
 const UNCHECK = "fa-circle";
 const LINE_THROUGH = "lineThrough";
 
+//add to do function
 function addToDo(toDo, id, done, trash) {
   if (trash) {
     return;
   }
 
   const DONE = done ? CHECK : UNCHECK;
-  const LINE = dond ? LINE_THROUGH : "";
+  const LINE = done ? LINE_THROUGH : "";
 
   const text = `
      <li class="item">
@@ -28,12 +37,14 @@ function addToDo(toDo, id, done, trash) {
 
   const position = "beforeend";
 
-  list.insertAdjacentHTML(position, text);
+  list.insertAdjacentHTML(position, item);
 }
 
 document.addEventListener("keyup", function(event) {
   if (event.keyCode == 13) {
     const toDo = input.value;
+
+    // if the input isn't empty
     if (toDo) {
       addToDo(toDo, id, false, false);
       LIST.push({
@@ -61,3 +72,41 @@ function removeToDo(element) {
   element.parentNode.parentNode.removeChild(element.parentNode);
   LIST[element.id].trash = true;
 }
+
+const list = document.getElementById("list");
+list.addEvenetListener("click", function(event) {
+  let element = event.target;
+  const elementJOB = event.target.attribute.job.value;
+  if (elementJOB == "complete") {
+    completeToDo();
+  } else if (elementJOB == "delete") {
+    removeToDo();
+  }
+
+  // update local storage
+  localStorage.setItem("key", "value");
+  let variabel = localStorage.setItem("key");
+  localStorage.setItem("TODO", JSON.stringify(LIST));
+});
+
+let data = localStorage.getItem("TODO");
+if (data) {
+  LIST = JSON.parse(data);
+  loadToDo(LIST);
+  id = LIST.length;
+} else {
+  LIST = [];
+  id = 0;
+}
+
+function loadToDo(array) {
+  array.forEach(function(item) {
+    addToDo(item.name, item.id, item.done, item.trash);
+  });
+}
+
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", function() {
+  localStorage.clear();
+  location.reload();
+});

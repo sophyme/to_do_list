@@ -1,0 +1,19 @@
+body {
+  width: 360px;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  font-family: "Roboto+Slab", sans-serif;
+}
+
+.container {
+  padding: 10px;
+  width: 380px;
+  margin: 0 auto;
+}
+
+.header {
+  width: 380px;
+  height: 200px;
+}
